@@ -12,3 +12,13 @@ jobs:
         run: |
           node -v
           npm -v
+  run-shell-command2:
+    runs-on: ubuntu-latest
+    needs: ['run-shell-command']
+    steps:
+      - name: echo a string
+        run: echo 'world'
+      - name: multiline
+        run: |
+          node -v
+          npm -v
