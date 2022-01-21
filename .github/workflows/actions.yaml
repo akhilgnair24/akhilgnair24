@@ -1,0 +1,16 @@
+name: test-actions
+
+on: [push]
+
+jobs:
+  Test-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: action-execution
+        id: greet
+        uses: actions/hello-world-javascript-action@v1
+        with:
+          who-to-greet: Ak
+      - name: greet
+        run: echo "${{steps.greet.outputs.time}}"
+        
