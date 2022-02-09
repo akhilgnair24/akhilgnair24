@@ -1,0 +1,5 @@
+costCode: CDSO024
+projectCode: aazzxxyy
+infra:
+  zone: a,b,c
+  region: us-e

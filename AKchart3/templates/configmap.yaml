@@ -1,0 +1,21 @@
+# defining a template in the same file
+#{{- define "mychart.systemlabels" }}
+#  labels:
+#    drive: ssd
+#    machine: frontdrive
+#    rack: 4c
+#    vcard: 8g
+#{{- end }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-configmap
+  #{{- template "mychart.systemlabels" }} #using the template which is present in the same file
+  # {{- template "mychart.systemlabelsfile"}} #using another template file
+  {{- template "mychart.systemlabelsfile" $}} # $ at the end passes the current scope , so that the variables in the template file can have values.
+{{ include "mychart.version" . | indent 4 }} #this template can be used with custom indent
+data:
+  myvalue: "Sample Config Map"
+  pipeline: {{ .Values.projectCode | upper | quote }} # upper: makes the value to uppercase, quote: qutoing the value
+  now: {{ now | date "2006-01-02" | quote }} # now : gives current date, date : format the date in the given format
+  contact: {{ .Values.contact | default "1-800-123-0000" | quote }} #get the value and if no value is fetched, assigning a default value.
